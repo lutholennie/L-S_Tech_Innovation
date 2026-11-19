@@ -1,0 +1,91 @@
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { Lock, Mail, KeyRound, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Badge } from "@/components/ui/badge";
+import { PageLayout } from "@/components/layout";
+import { GlassCard } from "@/components/GlassCard";
+
+export default function Portal() {
+  return (
+    <PageLayout>
+      <section className="min-h-[80vh] flex items-center py-20">
+        <div className="section-container">
+          <div className="max-w-md mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-center mb-8"
+            >
+              <h1 className="text-3xl md:text-4xl font-display font-bold mb-4">
+                Client Portal
+              </h1>
+              <p className="text-muted-foreground">
+                Access your project dashboard, documents, and reports.
+              </p>
+            </motion.div>
+
+            <GlassCard className="p-8 pulse-glow">
+              <div className="flex justify-center mb-6">
+                <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center">
+                  <Lock className="h-8 w-8 text-primary" />
+                </div>
+              </div>
+
+              <Badge className="w-full justify-center mb-6 py-2 text-sm">
+                Coming Soon
+              </Badge>
+
+              <form className="space-y-4">
+                <div>
+                  <Label htmlFor="email">Email</Label>
+                  <div className="relative mt-1">
+                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                    <Input
+                      id="email"
+                      type="email"
+                      placeholder="you@example.com"
+                      className="pl-10"
+                      disabled
+                    />
+                  </div>
+                </div>
+                <div>
+                  <Label htmlFor="password">Password</Label>
+                  <div className="relative mt-1">
+                    <KeyRound className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                    <Input
+                      id="password"
+                      type="password"
+                      placeholder="••••••••"
+                      className="pl-10"
+                      disabled
+                    />
+                  </div>
+                </div>
+                <Button className="w-full" disabled>
+                  <Lock className="mr-2 h-4 w-4" />
+                  Login
+                </Button>
+              </form>
+
+              <div className="mt-8 pt-6 border-t border-border/50 text-center">
+                <p className="text-sm text-muted-foreground mb-4">
+                  We are developing a secure client portal to track milestones, access reports and documents, and communicate securely.
+                </p>
+                <Link to="/contact">
+                  <Button variant="outline" size="sm">
+                    Request Access
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+              </div>
+            </GlassCard>
+          </div>
+        </div>
+      </section>
+    </PageLayout>
+  );
+}

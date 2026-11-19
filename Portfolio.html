@@ -1,0 +1,138 @@
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { ArrowRight, ArrowLeft } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { PageLayout } from "@/components/layout";
+import { GlassCard } from "@/components/GlassCard";
+import { SectionHeader } from "@/components/SectionHeader";
+
+const caseStudies = [
+  {
+    id: "sixls",
+    title: "SIXL'S Trading Enterprise CC",
+    category: "Trading & Services",
+    problem: "Fragmented administrative processes and limited visibility into operations across catering, maintenance, and service delivery divisions.",
+    solution: "Developed a comprehensive business systems plan and provided digital transformation support, including internal tools for administration and reporting.",
+    outcome: "Improved operational visibility, streamlined admin workflows, and positioned the business for funding readiness and sustainable growth.",
+    link: "/clients/sixls",
+  },
+  {
+    id: "lutho-sons",
+    title: "Lutho & Sons Protection Services",
+    category: "Security Services",
+    problem: "Manual incident reporting and coordination challenges affecting response times and accountability in security operations.",
+    solution: "Designed a security management application concept for incident reporting, operational tracking, and team coordination.",
+    outcome: "Clearer incident tracking, improved response coordination, and enhanced accountability across security operations.",
+    link: "/clients/lutho-and-sons",
+  },
+  {
+    id: "sme-dashboard",
+    title: "SME Operations Dashboard",
+    category: "Business Intelligence",
+    problem: "Scattered data across spreadsheets making it difficult to track KPIs and make informed business decisions.",
+    solution: "Built a centralised reporting dashboard with automated data collection, visual KPIs, and decision-support insights.",
+    outcome: "60% reduction in reporting time, real-time visibility into business performance, and faster, data-driven decision making.",
+    link: "/contact",
+  },
+];
+
+export default function Portfolio() {
+  return (
+    <PageLayout>
+      {/* Hero */}
+      <section className="py-20 lg:py-32">
+        <div className="section-container">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="max-w-3xl mx-auto text-center"
+          >
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6">
+              Portfolio &{" "}
+              <span className="gradient-text">Case Studies</span>
+            </h1>
+            <p className="text-lg text-muted-foreground">
+              Real projects with real impact. See how we've helped businesses improve their operations, technology, and outcomes.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Case Studies */}
+      <section className="py-20 bg-secondary/30">
+        <div className="section-container">
+          <div className="space-y-8">
+            {caseStudies.map((study, i) => (
+              <GlassCard key={study.id} className="p-8 lg:p-12">
+                <div className="grid lg:grid-cols-3 gap-8">
+                  <div className="lg:col-span-1">
+                    <span className="text-xs font-medium uppercase tracking-wider text-primary mb-2 block">
+                      {study.category}
+                    </span>
+                    <h2 className="text-2xl lg:text-3xl font-display font-bold mb-4">
+                      {study.title}
+                    </h2>
+                    <Link to={study.link}>
+                      <Button className="btn-shimmer mt-4">
+                        {study.id === "sme-dashboard" ? "Request Similar" : "View Project"}
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                      </Button>
+                    </Link>
+                  </div>
+
+                  <div className="lg:col-span-2 space-y-6">
+                    <div>
+                      <h3 className="text-sm font-semibold uppercase tracking-wider text-primary mb-2">
+                        The Problem
+                      </h3>
+                      <p className="text-muted-foreground">{study.problem}</p>
+                    </div>
+                    <div>
+                      <h3 className="text-sm font-semibold uppercase tracking-wider text-primary mb-2">
+                        Our Solution
+                      </h3>
+                      <p className="text-muted-foreground">{study.solution}</p>
+                    </div>
+                    <div>
+                      <h3 className="text-sm font-semibold uppercase tracking-wider text-primary mb-2">
+                        The Outcome
+                      </h3>
+                      <p className="text-foreground font-medium">{study.outcome}</p>
+                    </div>
+                  </div>
+                </div>
+              </GlassCard>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-20 lg:py-32">
+        <div className="section-container">
+          <GlassCard className="text-center max-w-3xl mx-auto">
+            <h2 className="text-3xl font-display font-bold mb-4">
+              Ready to start your project?
+            </h2>
+            <p className="text-muted-foreground mb-8">
+              Let's discuss how we can help your business achieve similar results.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link to="/services#quote-builder">
+                <Button size="lg" className="btn-shimmer">
+                  Get a Quote
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </Link>
+              <Link to="/contact">
+                <Button size="lg" variant="outline">
+                  Contact Us
+                </Button>
+              </Link>
+            </div>
+          </GlassCard>
+        </div>
+      </section>
+    </PageLayout>
+  );
+}

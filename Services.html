@@ -1,0 +1,434 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import { 
+  Globe, 
+  Settings, 
+  BarChart3, 
+  Layout, 
+  Wrench, 
+  ShieldCheck,
+  ArrowRight,
+  CheckCircle2
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { PageLayout } from "@/components/layout";
+import { GlassCard } from "@/components/GlassCard";
+import { SectionHeader } from "@/components/SectionHeader";
+
+const services = [
+  {
+    icon: Globe,
+    title: "Web Apps & Portals",
+    description: "Internal tools, client portals, and admin systems built for your specific workflows.",
+  },
+  {
+    icon: Settings,
+    title: "Business Systems & Automation",
+    description: "Workflows, approvals, and data capture systems that eliminate manual bottlenecks.",
+  },
+  {
+    icon: BarChart3,
+    title: "Dashboards & Reporting",
+    description: "KPIs, operational insights, and visual reporting that drive informed decisions.",
+  },
+  {
+    icon: Layout,
+    title: "Websites & Landing Pages",
+    description: "Modern sites built for conversion and trust, optimised for performance.",
+  },
+  {
+    icon: Wrench,
+    title: "Support & Maintenance",
+    description: "Updates, fixes, and monitoring guidance to keep your systems running smoothly.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Security Best Practices",
+    description: "Hardening, access control guidance, and safe design principles from day one.",
+  },
+];
+
+const steps = [
+  { id: 1, title: "Service Type" },
+  { id: 2, title: "Project Size" },
+  { id: 3, title: "Timeline" },
+  { id: 4, title: "Budget" },
+  { id: 5, title: "Contact" },
+];
+
+export default function Services() {
+  const [currentStep, setCurrentStep] = useState(1);
+  const [formData, setFormData] = useState({
+    serviceType: "",
+    projectSize: "",
+    timeline: "",
+    budget: "",
+    name: "",
+    email: "",
+    whatsapp: "",
+    message: "",
+  });
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleNext = () => {
+    if (currentStep < 5) setCurrentStep(currentStep + 1);
+  };
+
+  const handleBack = () => {
+    if (currentStep > 1) setCurrentStep(currentStep - 1);
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitted(true);
+  };
+
+  const getBudgetEstimate = () => {
+    const estimates: Record<string, string> = {
+      "5k-15k": "R5,000 – R15,000",
+      "15k-50k": "R15,000 – R50,000",
+      "50k-150k": "R50,000 – R150,000",
+      "150k+": "R150,000+",
+    };
+    return estimates[formData.budget] || "Custom quote";
+  };
+
+  return (
+    <PageLayout>
+      {/* Hero */}
+      <section className="py-20 lg:py-32">
+        <div className="section-container">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="max-w-3xl mx-auto text-center"
+          >
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6">
+              Services designed to solve{" "}
+              <span className="gradient-text">real business problems</span>
+            </h1>
+            <p className="text-lg text-muted-foreground">
+              From web applications to business automation, we deliver practical technology that makes your operations smoother and more efficient.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Services Grid */}
+      <section className="py-20 bg-secondary/30">
+        <div className="section-container">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            {services.map((service, i) => (
+              <GlassCard key={i}>
+                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+                  <service.icon className="h-6 w-6 text-primary" />
+                </div>
+                <h3 className="text-xl font-display font-semibold mb-2">
+                  {service.title}
+                </h3>
+                <p className="text-muted-foreground mb-4">{service.description}</p>
+                <Link to="/contact">
+                  <Button variant="ghost" size="sm" className="text-primary hover:text-primary">
+                    Request a Quote
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+              </GlassCard>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* IT Auditing Section */}
+      <section className="py-20 lg:py-32">
+        <div className="section-container">
+          <div className="max-w-4xl mx-auto">
+            <GlassCard className="text-center">
+              <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-6">
+                <ShieldCheck className="h-8 w-8 text-primary" />
+              </div>
+              <h2 className="text-2xl md:text-3xl font-display font-bold mb-4">
+                IT Auditing & Systems Review
+              </h2>
+              <p className="text-muted-foreground mb-4 max-w-2xl mx-auto">
+                We review websites, applications, and internal systems to identify gaps in security, performance, usability, compliance, and scalability — then prepare professional audit reports and presentations showing what is lacking, the risks, and practical recommendations.
+              </p>
+              <p className="text-sm text-muted-foreground mb-6">
+                <em>Ideal for organisations and agencies (e.g., training institutions or programmes) that need clarity on their current tech posture and improvement roadmap.</em>
+              </p>
+              <Link to="/contact">
+                <Button className="btn-shimmer">
+                  Request an Audit
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
+            </GlassCard>
+          </div>
+        </div>
+      </section>
+
+      {/* Quote Builder */}
+      <section id="quote-builder" className="py-20 lg:py-32 bg-secondary/30">
+        <div className="section-container">
+          <SectionHeader
+            badge="Instant Quote"
+            title="Get an estimate in minutes"
+            description="Answer a few questions about your project and receive a customised quote range."
+          />
+
+          <div className="max-w-2xl mx-auto">
+            <GlassCard className="p-8 lg:p-12">
+              {!submitted ? (
+                <>
+                  {/* Progress */}
+                  <div className="flex justify-between mb-8">
+                    {steps.map((step) => (
+                      <div
+                        key={step.id}
+                        className={`flex flex-col items-center ${
+                          step.id <= currentStep ? "text-primary" : "text-muted-foreground"
+                        }`}
+                      >
+                        <div
+                          className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium border-2 transition-colors ${
+                            step.id <= currentStep
+                              ? "border-primary bg-primary text-primary-foreground"
+                              : "border-muted"
+                          }`}
+                        >
+                          {step.id < currentStep ? (
+                            <CheckCircle2 className="h-5 w-5" />
+                          ) : (
+                            step.id
+                          )}
+                        </div>
+                        <span className="text-xs mt-1 hidden sm:block">{step.title}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <form onSubmit={handleSubmit}>
+                    <AnimatePresence mode="wait">
+                      {currentStep === 1 && (
+                        <motion.div
+                          key="step1"
+                          initial={{ opacity: 0, x: 20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          exit={{ opacity: 0, x: -20 }}
+                        >
+                          <Label className="text-lg mb-4 block">What do you need?</Label>
+                          <Select
+                            value={formData.serviceType}
+                            onValueChange={(v) => setFormData({ ...formData, serviceType: v })}
+                          >
+                            <SelectTrigger className="h-12">
+                              <SelectValue placeholder="Select a service type" />
+                            </SelectTrigger>
+                            <SelectContent className="bg-card border-border z-50">
+                              <SelectItem value="web-app">Web Apps & Portals</SelectItem>
+                              <SelectItem value="business-systems">Business Systems & Automation</SelectItem>
+                              <SelectItem value="dashboards">Dashboards & Reporting</SelectItem>
+                              <SelectItem value="websites">Websites & Landing Pages</SelectItem>
+                              <SelectItem value="support">Support & Maintenance</SelectItem>
+                              <SelectItem value="security">Security Best Practices</SelectItem>
+                              <SelectItem value="audit">IT Auditing & Review</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </motion.div>
+                      )}
+
+                      {currentStep === 2 && (
+                        <motion.div
+                          key="step2"
+                          initial={{ opacity: 0, x: 20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          exit={{ opacity: 0, x: -20 }}
+                        >
+                          <Label className="text-lg mb-4 block">Project size</Label>
+                          <div className="grid grid-cols-3 gap-4">
+                            {["Small", "Medium", "Large"].map((size) => (
+                              <button
+                                key={size}
+                                type="button"
+                                onClick={() => setFormData({ ...formData, projectSize: size.toLowerCase() })}
+                                className={`p-4 rounded-xl border-2 transition-all ${
+                                  formData.projectSize === size.toLowerCase()
+                                    ? "border-primary bg-primary/10"
+                                    : "border-border hover:border-primary/50"
+                                }`}
+                              >
+                                {size}
+                              </button>
+                            ))}
+                          </div>
+                        </motion.div>
+                      )}
+
+                      {currentStep === 3 && (
+                        <motion.div
+                          key="step3"
+                          initial={{ opacity: 0, x: 20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          exit={{ opacity: 0, x: -20 }}
+                        >
+                          <Label className="text-lg mb-4 block">When do you need it?</Label>
+                          <div className="grid grid-cols-2 gap-4">
+                            {[
+                              { value: "asap", label: "ASAP" },
+                              { value: "2-4-weeks", label: "2–4 weeks" },
+                              { value: "1-3-months", label: "1–3 months" },
+                              { value: "3+-months", label: "3+ months" },
+                            ].map((t) => (
+                              <button
+                                key={t.value}
+                                type="button"
+                                onClick={() => setFormData({ ...formData, timeline: t.value })}
+                                className={`p-4 rounded-xl border-2 transition-all ${
+                                  formData.timeline === t.value
+                                    ? "border-primary bg-primary/10"
+                                    : "border-border hover:border-primary/50"
+                                }`}
+                              >
+                                {t.label}
+                              </button>
+                            ))}
+                          </div>
+                        </motion.div>
+                      )}
+
+                      {currentStep === 4 && (
+                        <motion.div
+                          key="step4"
+                          initial={{ opacity: 0, x: 20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          exit={{ opacity: 0, x: -20 }}
+                        >
+                          <Label className="text-lg mb-4 block">Budget range (ZAR)</Label>
+                          <div className="grid grid-cols-2 gap-4">
+                            {[
+                              { value: "5k-15k", label: "R5k – R15k" },
+                              { value: "15k-50k", label: "R15k – R50k" },
+                              { value: "50k-150k", label: "R50k – R150k" },
+                              { value: "150k+", label: "R150k+" },
+                            ].map((b) => (
+                              <button
+                                key={b.value}
+                                type="button"
+                                onClick={() => setFormData({ ...formData, budget: b.value })}
+                                className={`p-4 rounded-xl border-2 transition-all ${
+                                  formData.budget === b.value
+                                    ? "border-primary bg-primary/10"
+                                    : "border-border hover:border-primary/50"
+                                }`}
+                              >
+                                {b.label}
+                              </button>
+                            ))}
+                          </div>
+                        </motion.div>
+                      )}
+
+                      {currentStep === 5 && (
+                        <motion.div
+                          key="step5"
+                          initial={{ opacity: 0, x: 20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          exit={{ opacity: 0, x: -20 }}
+                          className="space-y-4"
+                        >
+                          <Label className="text-lg mb-4 block">Your contact details</Label>
+                          <Input
+                            placeholder="Your name"
+                            value={formData.name}
+                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                            required
+                          />
+                          <Input
+                            type="email"
+                            placeholder="Email address"
+                            value={formData.email}
+                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                            required
+                          />
+                          <Input
+                            placeholder="WhatsApp number"
+                            value={formData.whatsapp}
+                            onChange={(e) => setFormData({ ...formData, whatsapp: e.target.value })}
+                          />
+                          <Textarea
+                            placeholder="Tell us more about your project (optional)"
+                            value={formData.message}
+                            onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                            rows={3}
+                          />
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+
+                    <div className="flex justify-between mt-8">
+                      <Button
+                        type="button"
+                        variant="outline"
+                        onClick={handleBack}
+                        disabled={currentStep === 1}
+                      >
+                        Back
+                      </Button>
+                      {currentStep < 5 ? (
+                        <Button type="button" onClick={handleNext}>
+                          Next
+                          <ArrowRight className="ml-2 h-4 w-4" />
+                        </Button>
+                      ) : (
+                        <Button type="submit" className="btn-shimmer">
+                          Get Quote
+                          <ArrowRight className="ml-2 h-4 w-4" />
+                        </Button>
+                      )}
+                    </div>
+                  </form>
+                </>
+              ) : (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="text-center py-8"
+                >
+                  <div className="w-16 h-16 rounded-full bg-green-500/10 flex items-center justify-center mx-auto mb-6">
+                    <CheckCircle2 className="h-8 w-8 text-green-500" />
+                  </div>
+                  <h3 className="text-2xl font-display font-bold mb-2">
+                    Quote Request Received!
+                  </h3>
+                  <p className="text-muted-foreground mb-4">
+                    Estimated project range: <strong className="text-foreground">{getBudgetEstimate()}</strong>
+                  </p>
+                  <p className="text-sm text-muted-foreground mb-6">
+                    We'll review your requirements and get back to you within 24-48 hours with a detailed proposal.
+                  </p>
+                  <Link to="/contact">
+                    <Button variant="outline">
+                      Contact Us Directly
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </Link>
+                </motion.div>
+              )}
+            </GlassCard>
+          </div>
+        </div>
+      </section>
+    </PageLayout>
+  );
+}

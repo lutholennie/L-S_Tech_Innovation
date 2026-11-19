@@ -1,0 +1,252 @@
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { ArrowRight, Zap, Shield, HeadphonesIcon, ExternalLink } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { PageLayout } from "@/components/layout";
+import { AnimatedCounter } from "@/components/AnimatedCounter";
+import { GlassCard } from "@/components/GlassCard";
+import { SectionHeader } from "@/components/SectionHeader";
+import sixlsBg from "@/assets/sixls-bg.jpg";
+import luthoSonsLogo from "@/assets/lutho-sons-logo.png";
+
+const stats = [
+  { value: 15, suffix: "+", label: "Systems Delivered" },
+  { value: 2500, suffix: "+", label: "Hours Saved" },
+  { value: 8, suffix: "+", label: "Clients Supported" },
+];
+
+const benefits = [
+  {
+    icon: Zap,
+    title: "Speed & Efficiency",
+    description: "Reduce manual work and automate repetitive admin tasks to free your team for what matters.",
+  },
+  {
+    icon: Shield,
+    title: "Secure by Design",
+    description: "Security and risk thinking built in from day one, not bolted on as an afterthought.",
+  },
+  {
+    icon: HeadphonesIcon,
+    title: "Reliable Support",
+    description: "Clear communication and dedicated after-launch support to keep your systems running smoothly.",
+  },
+];
+
+export default function Home() {
+  return (
+    <PageLayout>
+      {/* Hero Section */}
+      <section className="relative min-h-[90vh] flex items-center py-20 lg:py-32">
+        <div className="section-container relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="max-w-4xl mx-auto text-center"
+          >
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.8 }}
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold mb-6 leading-tight"
+            >
+              We build business systems and web apps that{" "}
+              <span className="gradient-text glow-text">make companies move faster.</span>
+            </motion.h1>
+            
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.8 }}
+              className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto"
+            >
+              L & S Tech Innovations designs practical, secure, and scalable solutions for SMEs and growing organisations.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6, duration: 0.8 }}
+              className="flex flex-col sm:flex-row gap-4 justify-center"
+            >
+              <Link to="/contact">
+                <Button size="lg" className="btn-shimmer glow-hover text-lg px-8">
+                  Book a Call
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </Link>
+              <Link to="/portfolio">
+                <Button size="lg" variant="outline" className="text-lg px-8">
+                  View Our Work
+                </Button>
+              </Link>
+            </motion.div>
+          </motion.div>
+
+          {/* Stats */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8, duration: 0.8 }}
+            className="mt-20 grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-3xl mx-auto"
+          >
+            {stats.map((stat, i) => (
+              <div key={i} className="text-center">
+                <div className="text-4xl md:text-5xl font-display font-bold gradient-text mb-2">
+                  <AnimatedCounter end={stat.value} suffix={stat.suffix} />
+                </div>
+                <p className="text-sm text-muted-foreground uppercase tracking-wider">
+                  {stat.label}
+                </p>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Benefits Section */}
+      <section className="py-20 lg:py-32">
+        <div className="section-container">
+          <SectionHeader
+            badge="Why Us"
+            title="Built for business. Designed for growth."
+            description="We combine business understanding with technical expertise to deliver solutions that actually work."
+          />
+
+          <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
+            {benefits.map((benefit, i) => (
+              <GlassCard key={i}>
+                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+                  <benefit.icon className="h-6 w-6 text-primary" />
+                </div>
+                <h3 className="text-xl font-display font-semibold mb-2">
+                  {benefit.title}
+                </h3>
+                <p className="text-muted-foreground">{benefit.description}</p>
+              </GlassCard>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Work Section */}
+      <section className="py-20 lg:py-32 bg-secondary/30">
+        <div className="section-container">
+          <SectionHeader
+            badge="Featured Work"
+            title="Projects that drive real results"
+            description="See how we've helped businesses streamline operations and achieve their goals."
+          />
+
+          <div className="grid lg:grid-cols-2 gap-6 lg:gap-8">
+            {/* SIXL'S Card */}
+            <Link to="/clients/sixls" className="group">
+              <GlassCard className="relative overflow-hidden h-full min-h-[320px]">
+                <div
+                  className="watermark-bg"
+                  style={{ backgroundImage: `url(${sixlsBg})` }}
+                />
+                <div className="relative z-10">
+                  <span className="text-xs font-medium uppercase tracking-wider text-primary mb-2 block">
+                    Trading & Services
+                  </span>
+                  <h3 className="text-2xl font-display font-bold mb-3">
+                    SIXL'S Trading Enterprise CC
+                  </h3>
+                  <p className="text-muted-foreground mb-6">
+                    Business systems planning and digital transformation support for a diversified enterprise operating in catering, maintenance, and service delivery.
+                  </p>
+                  <Button variant="outline" className="group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                    View Project
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </div>
+              </GlassCard>
+            </Link>
+
+            {/* Lutho & Sons Card */}
+            <Link to="/clients/lutho-and-sons" className="group">
+              <GlassCard className="relative overflow-hidden h-full min-h-[320px]">
+                <div
+                  className="watermark-bg"
+                  style={{ backgroundImage: `url(${luthoSonsLogo})` }}
+                />
+                <div className="relative z-10">
+                  <span className="text-xs font-medium uppercase tracking-wider text-primary mb-2 block">
+                    Security Services
+                  </span>
+                  <h3 className="text-2xl font-display font-bold mb-3">
+                    Lutho & Sons Protection Services
+                  </h3>
+                  <p className="text-muted-foreground mb-6">
+                    A security management application designed for incident reporting, operational tracking, and better coordination.
+                  </p>
+                  <Button variant="outline" className="group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                    View Project
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </div>
+              </GlassCard>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Quote Builder CTA */}
+      <section className="py-20 lg:py-32">
+        <div className="section-container">
+          <GlassCard className="text-center max-w-3xl mx-auto pulse-glow">
+            <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
+              Get an <span className="gradient-text">Instant Quote</span>
+            </h2>
+            <p className="text-muted-foreground mb-8 text-lg">
+              Use our interactive quote builder to get an estimate for your project in minutes.
+            </p>
+            <Link to="/services#quote-builder">
+              <Button size="lg" className="btn-shimmer glow-hover">
+                Start Quote Builder
+                <ExternalLink className="ml-2 h-5 w-5" />
+              </Button>
+            </Link>
+          </GlassCard>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="py-20 lg:py-32 bg-secondary/30">
+        <div className="section-container">
+          <SectionHeader
+            badge="Testimonials"
+            title="What our clients say"
+          />
+
+          <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
+            {[
+              {
+                quote: "L & S Tech Innovations helped us think differently about our systems. The approach was structured, clear, and focused on operational needs.",
+                author: "Systems Review Client",
+              },
+              {
+                quote: "Professional delivery and strong technical understanding. The solution matched how our business works.",
+                author: "SME Owner",
+              },
+              {
+                quote: "Security awareness and attention to detail stood out. We were shown gaps we didn't even know existed.",
+                author: "Client Feedback",
+              },
+            ].map((testimonial, i) => (
+              <GlassCard key={i}>
+                <div className="text-4xl text-primary/30 font-serif mb-4">"</div>
+                <p className="text-foreground mb-4">{testimonial.quote}</p>
+                <p className="text-sm text-muted-foreground font-medium">
+                  — {testimonial.author}
+                </p>
+              </GlassCard>
+            ))}
+          </div>
+        </div>
+      </section>
+    </PageLayout>
+  );
+}

@@ -1,0 +1,129 @@
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { 
+  HardHat, 
+  Shield, 
+  Store, 
+  Briefcase, 
+  GraduationCap,
+  ArrowRight 
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { PageLayout } from "@/components/layout";
+import { GlassCard } from "@/components/GlassCard";
+
+const industries = [
+  {
+    icon: HardHat,
+    title: "Construction & Plant Hire",
+    challenge: "Managing equipment, job tracking, and subcontractor coordination across multiple sites.",
+    solution: "We build systems for equipment scheduling, job costing, site management, and real-time project visibility.",
+  },
+  {
+    icon: Shield,
+    title: "Security Companies",
+    challenge: "Tracking incidents, managing guard deployments, and maintaining accountability across shifts.",
+    solution: "We design incident reporting apps, deployment dashboards, and operational tracking systems.",
+  },
+  {
+    icon: Store,
+    title: "SMEs & Retail",
+    challenge: "Scattered data, manual processes, and difficulty tracking business performance.",
+    solution: "We deliver inventory tools, sales dashboards, and automation that saves time and reduces errors.",
+  },
+  {
+    icon: Briefcase,
+    title: "Professional Services",
+    challenge: "Client management, project tracking, and billing across multiple engagements.",
+    solution: "We create client portals, time tracking systems, and workflow automation for service businesses.",
+  },
+  {
+    icon: GraduationCap,
+    title: "Training Institutions & Agencies",
+    challenge: "Managing learners, tracking progress, and reporting to stakeholders.",
+    solution: "We build learner management systems, progress tracking, and compliance reporting tools.",
+  },
+];
+
+export default function Industries() {
+  return (
+    <PageLayout>
+      {/* Hero */}
+      <section className="py-20 lg:py-32">
+        <div className="section-container">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="max-w-3xl mx-auto text-center"
+          >
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6">
+              Industries{" "}
+              <span className="gradient-text">We Serve</span>
+            </h1>
+            <p className="text-lg text-muted-foreground">
+              We understand the unique challenges of different sectors and build solutions that fit how your business actually works.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Industries Grid */}
+      <section className="py-20 bg-secondary/30">
+        <div className="section-container">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            {industries.map((industry, i) => (
+              <GlassCard key={i} className="flex flex-col">
+                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+                  <industry.icon className="h-6 w-6 text-primary" />
+                </div>
+                <h3 className="text-xl font-display font-semibold mb-4">
+                  {industry.title}
+                </h3>
+                <div className="space-y-4 flex-1">
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-wider text-primary mb-1">
+                      Common Challenge
+                    </p>
+                    <p className="text-sm text-muted-foreground">{industry.challenge}</p>
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-wider text-primary mb-1">
+                      How We Help
+                    </p>
+                    <p className="text-sm text-muted-foreground">{industry.solution}</p>
+                  </div>
+                </div>
+                <Link to="/contact" className="mt-6">
+                  <Button variant="ghost" size="sm" className="text-primary hover:text-primary p-0">
+                    Discuss Your Needs
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+              </GlassCard>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-20 lg:py-32">
+        <div className="section-container">
+          <GlassCard className="text-center max-w-3xl mx-auto">
+            <h2 className="text-3xl font-display font-bold mb-4">
+              Don't see your industry?
+            </h2>
+            <p className="text-muted-foreground mb-8">
+              We work across sectors. If you have a business challenge that technology could solve, we'd love to hear about it.
+            </p>
+            <Link to="/contact">
+              <Button size="lg" className="btn-shimmer">
+                Let's Talk
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+            </Link>
+          </GlassCard>
+        </div>
+      </section>
+    </PageLayout>
+  );
+}

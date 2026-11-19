@@ -1,0 +1,287 @@
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { 
+  Heart, 
+  Target, 
+  Shield, 
+  MessageSquare, 
+  Sprout,
+  ArrowRight,
+  ExternalLink,
+  Award
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { PageLayout } from "@/components/layout";
+import { GlassCard } from "@/components/GlassCard";
+import { SectionHeader } from "@/components/SectionHeader";
+import founderPhoto from "@/assets/founder.jpeg";
+
+const certifications = [
+  "C++ Essentials 1",
+  "Ethical Hacker",
+  "Introduction to Cybersecurity",
+  "Junior Cybersecurity Analyst Career Path Exam",
+  "Data Link Layer Network Technology Micro-Certification",
+  "Cloud Service Computing Micro-Certification",
+  "Artificial Intelligence and Applications",
+  "Introduction to Python Basics",
+];
+
+const values = [
+  { icon: Heart, title: "Integrity", description: "Honest, transparent dealings in every interaction." },
+  { icon: Target, title: "Delivery Excellence", description: "We commit to quality and meet our deadlines." },
+  { icon: Shield, title: "Security Awareness", description: "Cyber principles considered from day one." },
+  { icon: MessageSquare, title: "Clear Communication", description: "Clients always know what's happening." },
+  { icon: Sprout, title: "Growth & Mentorship", description: "Developing talent and sharing knowledge." },
+];
+
+const whyChooseUs = [
+  "Business-first thinking (we understand operations, not only code)",
+  "Secure by design (cyber principles considered early)",
+  "Practical delivery (no over-engineering; scalable solutions)",
+  "Clear communication (clients always know what's happening)",
+  "Local insight, modern standards (built for SA realities + global best practices)",
+];
+
+export default function About() {
+  return (
+    <PageLayout>
+      {/* Hero */}
+      <section className="py-20 lg:py-32">
+        <div className="section-container">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="max-w-3xl mx-auto text-center"
+          >
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6">
+              About{" "}
+              <span className="gradient-text">L & S Tech</span>
+            </h1>
+            <p className="text-lg text-muted-foreground">
+              A South African technology company focused on practical solutions, secure systems, and sustainable business growth.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Founder Section */}
+      <section className="py-20 bg-secondary/30">
+        <div className="section-container">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <div className="relative">
+                <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent rounded-2xl blur-3xl" />
+                <img
+                  src={founderPhoto}
+                  alt="Lutho Lennie Sonkosi - Founder"
+                  className="relative rounded-2xl w-full max-w-md mx-auto lg:mx-0 shadow-2xl"
+                />
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <span className="text-xs font-medium uppercase tracking-wider text-primary mb-2 block">
+                Meet the Founder
+              </span>
+              <h2 className="text-3xl md:text-4xl font-display font-bold mb-6">
+                Lutho Lennie Sonkosi
+              </h2>
+              <div className="space-y-4 text-muted-foreground">
+                <p>
+                  Lutho Lennie Sonkosi is a South African tech entrepreneur, systems builder, and applications developer driven by one principle: <strong className="text-foreground">technology must solve real business problems.</strong>
+                </p>
+                <p>
+                  His journey spans legal, financial, and entrepreneurial environments, giving him practical insight into operations, risk, and business reality. In 2022, he formalised his transition into technology by completing a Diploma in ICT (Applications Development), strengthening his skills in software development, systems design, and problem-solving.
+                </p>
+                <p>
+                  Beyond formal education, he invests continuously in professional certifications to support secure systems, risk awareness, and future-ready delivery. Today, as Founder and Director of L & S Tech Innovations (Pty) Ltd, he leads with discipline, accountability, and long-term vision — building systems businesses can rely on.
+                </p>
+              </div>
+              <a
+                href="https://lutho-unboxed.lovable.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block mt-6"
+              >
+                <Button variant="outline">
+                  Explore the Founder's Work
+                  <ExternalLink className="ml-2 h-4 w-4" />
+                </Button>
+              </a>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Mission & Vision */}
+      <section className="py-20 lg:py-32">
+        <div className="section-container">
+          <div className="grid md:grid-cols-2 gap-8">
+            <GlassCard>
+              <h3 className="text-2xl font-display font-bold mb-4 gradient-text">Our Mission</h3>
+              <p className="text-muted-foreground">
+                To design and deliver practical, secure, and scalable technology solutions that help businesses operate efficiently, make informed decisions, and grow sustainably.
+              </p>
+            </GlassCard>
+            <GlassCard>
+              <h3 className="text-2xl font-display font-bold mb-4 gradient-text">Our Vision</h3>
+              <p className="text-muted-foreground">
+                To become a trusted South African technology partner known for reliable systems, ethical delivery, and developing the next generation of skilled technologists.
+              </p>
+            </GlassCard>
+          </div>
+        </div>
+      </section>
+
+      {/* Team */}
+      <section className="py-20 bg-secondary/30">
+        <div className="section-container">
+          <SectionHeader
+            badge="Our Team"
+            title="Lean, focused, quality-driven"
+            description="We operate as a lean, focused team designed for quality delivery and responsible growth."
+          />
+
+          <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+            <GlassCard>
+              <h3 className="text-xl font-display font-semibold mb-2">Senior Developer</h3>
+              <p className="text-muted-foreground">
+                Responsible for architecture, code quality, and reliability across all projects.
+              </p>
+            </GlassCard>
+            <GlassCard>
+              <div className="flex items-start justify-between mb-2">
+                <h3 className="text-xl font-display font-semibold">Lunathi</h3>
+                <Badge variant="secondary">Intern</Badge>
+              </div>
+              <p className="text-muted-foreground mb-4">
+                Hands-on learning and real project contribution, building skills through practice.
+              </p>
+              <a
+                href="https://lunathi-builds-wonder.lovable.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button variant="ghost" size="sm" className="text-primary hover:text-primary p-0">
+                  View Lunathi's Work
+                  <ExternalLink className="ml-2 h-4 w-4" />
+                </Button>
+              </a>
+            </GlassCard>
+          </div>
+        </div>
+      </section>
+
+      {/* Values */}
+      <section className="py-20 lg:py-32">
+        <div className="section-container">
+          <SectionHeader
+            badge="Our Values"
+            title="What we stand for"
+          />
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
+            {values.map((value, i) => (
+              <GlassCard key={i} className="text-center">
+                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                  <value.icon className="h-6 w-6 text-primary" />
+                </div>
+                <h3 className="font-display font-semibold mb-2">{value.title}</h3>
+                <p className="text-sm text-muted-foreground">{value.description}</p>
+              </GlassCard>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Certifications */}
+      <section className="py-20 bg-secondary/30">
+        <div className="section-container">
+          <SectionHeader
+            badge="Certifications"
+            title="Continuous learning & professional growth"
+          />
+
+          <div className="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto">
+            {certifications.map((cert, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.05 }}
+              >
+                <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-card border border-border/50 text-sm">
+                  <Award className="h-4 w-4 text-primary" />
+                  {cert}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Why Choose Us */}
+      <section className="py-20 lg:py-32">
+        <div className="section-container">
+          <div className="max-w-3xl mx-auto">
+            <SectionHeader
+              badge="Why Choose Us"
+              title="What sets us apart"
+            />
+
+            <GlassCard>
+              <ul className="space-y-4">
+                {whyChooseUs.map((item, i) => (
+                  <motion.li
+                    key={i}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.1 }}
+                    className="flex items-start gap-3"
+                  >
+                    <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0 mt-0.5">
+                      <ArrowRight className="h-3 w-3 text-primary" />
+                    </div>
+                    <span className="text-muted-foreground">{item}</span>
+                  </motion.li>
+                ))}
+              </ul>
+            </GlassCard>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-20 bg-secondary/30">
+        <div className="section-container">
+          <GlassCard className="text-center max-w-3xl mx-auto">
+            <h2 className="text-3xl font-display font-bold mb-4">
+              Ready to work together?
+            </h2>
+            <p className="text-muted-foreground mb-8">
+              Let's discuss how we can help your business with practical, secure technology solutions.
+            </p>
+            <Link to="/contact">
+              <Button size="lg" className="btn-shimmer">
+                Get in Touch
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+            </Link>
+          </GlassCard>
+        </div>
+      </section>
+    </PageLayout>
+  );
+}
